@@ -3,8 +3,9 @@ FROM alpine:3.15
 RUN	apk update \
 	&& apk add nginx
 
-COPY default /etc/nginx/sites-available/default
+ADD nginx.conf /etc/nginx/
+COPY ./index.html /usr/share/nginx/html/index.html
  
-EXPOSE 443
+#EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]
