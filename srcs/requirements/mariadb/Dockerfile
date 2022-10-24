@@ -1,11 +1,10 @@
 #FROM mariadb
 FROM alpine:3.15
 
-#VOLUME [ “/sys/fs/cgroup” ]
+VOLUME /home/mkhabou/data/mariadb
 
 RUN	apk update \
-	&& apk add mariadb mariadb-client mariadb-server-utils \
-#	&& apk add mysql mysql-client
+	&& apk add mariadb mariadb-client \
 	&& apk add openrc --no-cache
 
 #RUN mysql_install_db --user=mysql \
