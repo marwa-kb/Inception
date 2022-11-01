@@ -28,10 +28,10 @@ EXPOSE 3306
 #	&& cd /usr && /usr/bin/mysqld_safe --datadir='/var/lib/mysql' '&' \
 #	&& mysqld_safe &
 
-WORKDIR /usr
-COPY config.sh /usr
-RUN chmod +x config.sh
-RUN ./config.sh
+#WORKDIR /usr
+#COPY config.sh /usr
+#RUN chmod +x config.sh
+#RUN ./config.sh
 
 #RUN /etc/init.d/mariadb setup
 #RUN /etc/init.d/mariadb start
