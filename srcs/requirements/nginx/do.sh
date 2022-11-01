@@ -1,2 +1,2 @@
 sudo docker build -t $1 .
-sudo docker run -p 443:443 -it $1 sh
+sudo docker run -it -p 443:443 $1 sh
