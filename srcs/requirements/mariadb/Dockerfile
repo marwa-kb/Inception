@@ -6,8 +6,9 @@ FROM alpine:3.15
 RUN	apk update \
 	&& apk add mariadb mariadb-client
 
-ADD config.sh /
+ADD start.sh /
+ADD config.sql /
 
 EXPOSE 3306
 
-CMD ["/bin/sh", "config.sh"]
+CMD ["/bin/sh", "start.sh"]
