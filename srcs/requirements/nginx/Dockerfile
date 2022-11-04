@@ -10,8 +10,9 @@ ADD ./certs/nginx-selfsigned.crt /etc/ssl/certs/nginx-selfsigned.crt
 ADD ./certs/nginx-selfsigned.key /etc/ssl/private/nginx-selfsigned.key
 ADD nginx.conf /etc/nginx/
 
+## tmp ##
 COPY ./index.html /usr/share/nginx/html/index.html
 
 EXPOSE 443
 
-CMD ["nginx", "-g", "'daemon off;'"]
+CMD ["nginx", "-g", "daemon off;"]
