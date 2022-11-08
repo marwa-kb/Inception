@@ -30,8 +30,8 @@ services:
 #    depends_on:
 #      - mariadb
     build: ./requirements/wordpress/
-    ports:
-      - "9000:9000"
+    #ports:
+    #  - "9000:9000"
     volumes:
       - wp_data:/var/www/html
     networks:
