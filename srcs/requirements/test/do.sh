@@ -1,2 +1,3 @@
-sudo docker build -t $1 .
-sudo docker run -it $1 sh
+sudo docker build -t test .
+sudo docker run -d -p 443:443 --name ngx test
+sudo docker exec -it ngx sh
