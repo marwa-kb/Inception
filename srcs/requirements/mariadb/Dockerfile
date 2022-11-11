@@ -6,6 +6,8 @@ RUN	apk update \
 ADD start.sh /
 ADD config.sql /
 
+RUN sed -i 's/#bind-address/bind-address/g' /etc/my.cnf.d/mariadb-server.cnf
+
 EXPOSE 3306
 
 CMD ["/bin/sh", "start.sh"]
