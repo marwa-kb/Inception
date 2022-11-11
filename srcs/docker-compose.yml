@@ -2,41 +2,45 @@ version: '3'
 
 services:
 #  mariadb:
+#    container_name: mariadb
 #    build: requirements/mariadb/
-#    ports:
-#      - "3306:3306"
+##    ports:
+##      - "3306:3306"
 #    volumes:
-#      - /home/mkhabou/data/mariadb
-#    environment:
-#      - MYSQL_ROOT_PASSWORD=password1
-#      - MYSQL_USER=user
-#      - MYSQL_PASSWORD=password2
-#      - MYSQL_DATABASE=database
+#      - mdb_data:/var/lib/mysql
+##    environment:
+##      - MYSQL_ROOT_PASSWORD=password1
+##      - MYSQL_USER=user
+##      - MYSQL_PASSWORD=password2
+##      - MYSQL_DATABASE=database
 #    restart: always
-
-  nginx:
-    container_name: nginx
-    build: ./requirements/nginx/
-    ports:
-      - "443:443"
-    volumes:
-      - wp_data:/var/www/html
-    networks:
-      - inception
-    restart: always
 
   wordpress:
     container_name: wordpress
-#    depends_on:
-#      - mariadb
+    depends_on:
+      - mariadb
     build: ./requirements/wordpress/
     #ports:
     #  - "9000:9000"
     volumes:
-      - wp_data:/var/www/html
+      - wp_data:/var/www/localhost/htdocs
     networks:
       - inception
     restart: always
+
+  nginx:
+    container_name: nginx
+    depends_on:
+      - mariadb
+    build: ./requirements/nginx/
+    ports:
+      - "443:443"
+    volumes:
+      - wp_data:/var/www/localhost/htdocs
+    networks:
+      - inception
+    restart: always
+
 
 volumes:
   wp_data:
@@ -45,6 +49,13 @@ volumes:
       o: bind
       type: none
       device: /home/mkhabou/data/wordpress
+
+  mdb_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/mkhabou/data/mariadb
 
 networks:
   inception:
