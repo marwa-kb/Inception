@@ -38,7 +38,7 @@ services:
   nginx:
     container_name: nginx
     depends_on:
-      - mariadb
+      - wordpress
     build: ./requirements/nginx/
     ports:
       - "443:443"
