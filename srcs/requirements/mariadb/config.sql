@@ -1,5 +1,4 @@
 CREATE DATABASE wordpress;
-CREATE USER 'mk'@'localhost' IDENTIFIED BY 'mdp';
-GRANT ALL PRIVILEGES ON wordpress.* TO mk@localhost;
+CREATE USER 'mk'@'wordpress.srcs_inception' IDENTIFIED BY 'mdp';
+GRANT ALL PRIVILEGES ON wordpress.* TO mk@wordpress.srcs_inception;
 FLUSH PRIVILEGES;
-exit
