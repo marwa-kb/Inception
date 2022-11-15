@@ -4,7 +4,7 @@ RUN	apk update \
 	&& apk add bash mariadb mariadb-client
 
 ADD start.sh /
-ADD config.sql /
+#ADD config.sql /
 
 RUN sed -i "s|skip-networking|skip-networking=0|g" /etc/my.cnf.d/mariadb-server.cnf
 RUN sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/my.cnf.d/mariadb-server.cnf

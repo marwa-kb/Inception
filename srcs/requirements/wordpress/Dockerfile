@@ -20,9 +20,10 @@ WORKDIR /var/www/localhost/htdocs/
 #RUN wp config create --dbname=localhost --dbuser=mk --dbpass=mdp \
 #	&& wp config set --add FS_METHOD direct \
 
-#RUN	wp config create --dbname=wordpress --dbhost=mariadb --dbuser=mk --dbpass=mdp \
+#RUN	wp config create --dbname=$WORDPRESS_DB_NAME --dbhost=mariadb --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASSWORD \
 #	&& wp core install --url=mkhabou.42.fr --title=Welcome --admin_user=mk \
-#	--admin_password=mdp --admin_email=marwa2000@hotmail.fr
+#	--admin_password=mdp --admin_email=marwa2000@hotmail.fr \
+#	&&  wp theme install inspiro --activate
 
 # Make reachable outside the container
 RUN sed -i 's/listen = 127.0.0.1/listen = 0.0.0.0/g' /etc/php7/php-fpm.d/www.conf
