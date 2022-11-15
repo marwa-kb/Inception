@@ -4,16 +4,15 @@
 
 /usr/bin/mysql_install_db --user='mysql' --datadir='/var/lib/mysql'
 
-cd /usr ;
-
-touch tmp.sql
-echo "CREATE DATABASE $MYSQL_DATABASE;" > tmp
-echo "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" >> tmp
-echo "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO $MYSQL_USER@%;" >> tmp
-echo "FLUSH PRIVILEGES;" >> tmp
+touch config
+echo "CREATE DATABASE $MYSQL_DATABASE;" > config
+echo "CREATE USER 'root'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';" >> config
+echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION;" >> config
+echo "FLUSH PRIVILEGES;" >> config
 
 #some configuration to disable to connect without password
 
-< tmp /usr/bin/mysqld_safe --datadir='/var/lib/mysql'
+#/usr/bin/mysqld_safe --datadir='/var/lib/mysql' < config
 
-rm tmp
+#rm config
+sleep infinity

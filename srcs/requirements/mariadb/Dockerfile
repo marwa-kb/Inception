@@ -3,7 +3,9 @@ FROM alpine:3.15
 RUN	apk update \
 	&& apk add bash mariadb mariadb-client
 
-ADD start.sh /
+WORKDIR /usr
+
+ADD start.sh .
 #ADD config.sql /
 
 RUN sed -i "s|skip-networking|skip-networking=0|g" /etc/my.cnf.d/mariadb-server.cnf
