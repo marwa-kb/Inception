@@ -6,36 +6,37 @@ MARIADB_DIR		=	/home/mkhabou/data/mariadb
 
 WORPRESS_DIR	=	/home/mkhabou/data/wordpress
 
+
 $(DIRS_CREATED)	:
-					mkdir -p /home/mkhabou/data/mariadb
+					mkdir -p $(MARIADB_DIR)
+					mkdir -p $(WORDPRESS_DIR)
 
 
-all		:$(DIRS_CREATED)
-			$(DOCKER_COMPOSE) up -d
+all		:	up
+
+build	:	$(DIRS_CREATED)
+				$(DOCKER_COMPOSE) up --build -d
+
+up		:	$(DIRS_CREATED)
+				$(DOCKER_COMPOSE) up -d
+
+down	:
+				$(DOCKER_COMPOSE) down
 
 ps		:
-			$(DOCKER_COMPOSE) ps
+				$(DOCKER_COMPOSE) ps
 
 logs	:
-			$(DOCKER_COMPOSE) logs
+				$(DOCKER_COMPOSE) logs
 
-#down	:
-#			$(DOCKER_COMPOSE) down
+clean	:
+				$(DOCKER_COMPOSE) down -v --rmi all
 
-#restart	:
-#			$(DOCKER_COMPOSE) restart
-
-#start	:
-#			$(DOCKER_COMPOSE) start
-
-#stop	:
-#			$(DOCKER_COMPOSE) stop
-
-#clean	:
-#
-#fclean	:
-#
+#fclean	:clean
+#			rm -rf $(MARIADB_DIR)/*
+#			rm -rf $(WORDPRESS_DIR)/*
 #re		:
+#			$(DOCKER_COMPOSE) up -d --force-recreate
 
-.PHONY	:	all ps logs #clean fclean re
+.PHONY	:	all up start restart stop down ps logs clean fclean re
 

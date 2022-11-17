@@ -4,8 +4,6 @@ services:
   mariadb:
     container_name: mariadb
     build: requirements/mariadb/
-#    ports:
-#      - "3306:3306"
     volumes:
       - mdb_data:/var/lib/mysql
     environment:
@@ -22,8 +20,6 @@ services:
     depends_on:
       - mariadb
     build: ./requirements/wordpress/
-    #ports:
-    #  - "9000:9000"
     volumes:
       - wp_data:/var/www/localhost/htdocs
     environment:
@@ -45,6 +41,7 @@ services:
     container_name: nginx
     depends_on:
       - wordpress
+      - mariadb
     build: ./requirements/nginx/
     ports:
       - "443:443"
