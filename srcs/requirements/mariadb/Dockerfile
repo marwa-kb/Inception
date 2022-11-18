@@ -15,4 +15,4 @@ RUN chmod 777 /var/lib/mysql
 
 EXPOSE 3306
 
-CMD ["/bin/sh", "start_mariadb.sh"]
+CMD ["/bin/bash", "start_mariadb.sh"]

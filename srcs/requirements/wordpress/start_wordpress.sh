@@ -1,18 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 
 DIR='/var/www/localhost/htdocs'
 
 cd $DIR
 
 while ! mariadb -h$WORDPRESS_DB_HOST -u$WORDPRESS_DB_USER -p$WORDPRESS_DB_PASSWORD $WORDPRESS_DB_NAME &> /dev/null; do
-	echo "⏳ waiting for MariaDB..."
-	sleep 2
+	echo "Waiting for MariaDB..."
+	sleep 5
 done
 
 if [ "$(ls -A $DIR)" ]; then
-    echo "🟣 Wordpress is already configurated"
+    echo "Wordpress is already configurated"
 else
-    echo "⏳ creating new Wordpress configuration..."
+    echo "Creating new Wordpress configuration..."
 
 	wget https://wordpress.org/wordpress-6.0.3.zip && unzip wordpress-6.0.3.zip > /dev/null\
 	&& rm wordpress-6.0.3.zip && mv wordpress/* . && rm -rf wordpress \
@@ -27,8 +27,8 @@ else
 	wp user create $WORDPRESS_USER $WORDPRESS_USER_MAIL --role=author --user_pass=$WORDPRESS_USER_PASSWORD
 	
 	wp theme install inspiro --activate
-	echo "🟣 Wordpress is now configurated"
+	echo "Wordpress is now configurated"
 fi
 
-echo "✅ starting Wordpress container"
+echo "✅ Starting Wordpress container"
 /usr/sbin/php-fpm7 -F

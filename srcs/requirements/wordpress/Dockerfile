@@ -18,4 +18,4 @@ WORKDIR /var/www/localhost/htdocs/
 
 EXPOSE 9000
 
-CMD ["/bin/sh", "/start_wordpress.sh"]
+CMD ["/bin/bash", "/start_wordpress.sh"]
