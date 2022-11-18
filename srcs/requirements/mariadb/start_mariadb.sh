@@ -9,16 +9,18 @@ then
     sleep 2
 
     echo "CREATE DATABASE $MYSQL_DATABASE;" | mysql
-    echo "CREATE USER '$MYSQL_USER'@'wordpress.srcs_inception' IDENTIFIED BY '$MYSQL_PASSWORD';" | mysql
-    echo "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'wordpress.srcs_inception';" | mysql
+    echo "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" | mysql
+    echo "GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;" | mysql
     echo "FLUSH PRIVILEGES;" | mysql
-    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';" | mysql -u root -ppassword
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';" | mysql -u root # -ppassword
     echo "MariaDB database created"
-
-    pkill mariadbd
 else
     echo "MariaDB database already exists"
+    pkill mysqld
+    /usr/bin/mysqld_safe --user='mysql' &
+    sleep 2
 fi
 
+pkill mariadbd
 echo "✅ Starting MariaDB container"
-mysqld --user='mysql'
+mysqld --user='mysql' --datadir='/var/lib/mysql'
