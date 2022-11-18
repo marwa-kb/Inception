@@ -2,7 +2,7 @@
 
 if [ ! -f /var/lib/mysql/ibdata1 ]
 then
-    echo "Creating MariaDB database..."
+    echo "..........Creating MariaDB database........."
 
     /usr/bin/mysql_install_db --user='mysql' --datadir='/var/lib/mysql' > /dev/null
     /usr/bin/mysqld_safe --user='mysql' &
@@ -13,9 +13,9 @@ then
     echo "GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;" | mysql
     echo "FLUSH PRIVILEGES;" | mysql
     echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';" | mysql -u root # -ppassword
-    echo "MariaDB database created"
+    echo "========== MariaDB database created ========="
 else
-    echo "MariaDB database already exists"
+    echo "====== MariaDB database already exists ======"
     pkill mysqld
     /usr/bin/mysqld_safe --user='mysql' &
     sleep 2
