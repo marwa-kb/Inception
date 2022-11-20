@@ -38,5 +38,5 @@ clean	:
 #re		:
 #			$(DOCKER_COMPOSE) up -d --force-recreate
 
-.PHONY	:	all up start restart stop down ps logs clean fclean re
+.PHONY	:	all up start stop down ps logs clean
 
