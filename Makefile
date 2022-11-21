@@ -4,20 +4,13 @@ DOCKER_COMPOSE	=	docker compose -f $(PATH_DC_FILE)
 
 MARIADB_DIR		=	/home/mkhabou/data/mariadb
 
-WORPRESS_DIR	=	/home/mkhabou/data/wordpress
-
-
-$(DIRS_CREATED)	:
-					mkdir -p $(MARIADB_DIR)
-					mkdir -p $(WORDPRESS_DIR)
+WORDPRESS_DIR	=	/home/mkhabou/data/wordpress
 
 
 all		:	up
 
-build	:	$(DIRS_CREATED)
-				$(DOCKER_COMPOSE) up --build -d
 
-up		:	$(DIRS_CREATED)
+up		:	dirs
 				$(DOCKER_COMPOSE) up -d
 
 down	:
@@ -27,16 +20,15 @@ ps		:
 				$(DOCKER_COMPOSE) ps
 
 logs	:
-				$(DOCKER_COMPOSE) logs
+				$(DOCKER_COMPOSE) logs -f
 
 clean	:
-				$(DOCKER_COMPOSE) down -v --rmi all
+				$(DOCKER_COMPOSE) down --volumes --rmi all; 
 
-#fclean	:clean
-#			rm -rf $(MARIADB_DIR)/*
-#			rm -rf $(WORDPRESS_DIR)/*
-#re		:
-#			$(DOCKER_COMPOSE) up -d --force-recreate
+dirs	:
+				mkdir -p $(WORDPRESS_DIR) && mkdir -p $(MARIADB_DIR)
 
-.PHONY	:	all up start stop down ps logs clean
+
+
+.PHONY	:	all up start down ps logs
 

@@ -5,7 +5,6 @@ RUN apk update \
 	php7 php7-fpm php7-opcache php7-phar \
 	php7-iconv php7-gd php7-mysqli php7-curl php7-json
 
-#RUN adduser -S nginx && addgroup -S nginx
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 	&& chmod +x wp-cli.phar \
 	&& mv wp-cli.phar /usr/local/bin/wp

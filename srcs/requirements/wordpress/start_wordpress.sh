@@ -35,4 +35,4 @@ else
 fi
 
 echo "✅ Starting Wordpress container"
-/usr/sbin/php-fpm7 -F
+exec /usr/sbin/php-fpm7 -F

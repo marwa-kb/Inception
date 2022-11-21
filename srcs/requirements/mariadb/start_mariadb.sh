@@ -26,4 +26,4 @@ fi
 
 pkill mariadbd
 echo "✅ Starting MariaDB container"
-mysqld --user='mysql' --datadir='/var/lib/mysql'
+exec mysqld --user='mysql' --datadir='/var/lib/mysql'
