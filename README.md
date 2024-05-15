@@ -2,7 +2,7 @@
 
 ### For this 42 project, the aim was to broaden our knowledge of system administration by using Docker.
 
-We created three Docker images from scratch: Nginx, Wordpress/php, and MariaDB. We then had to make them work together with docker compose and a docker network.
+I created three Docker images from scratch: Nginx, Wordpress/php, and MariaDB. Then I had to make them work together with docker compose and a docker network.
 
 _This project consists in having you set up a small infrastructure composed of different services under specific rules. [...]   
 Each service has to run in a dedicated container.  
